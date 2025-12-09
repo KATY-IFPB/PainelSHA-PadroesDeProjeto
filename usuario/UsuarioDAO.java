@@ -15,125 +15,133 @@ import src.Messages;
 
 public class UsuarioDAO {
 
-    // Instância única (Singleton)
-    private static UsuarioDAO instancia;
+	// Instância única (Singleton)
+	private static UsuarioDAO instancia;
 
-    // Caminho fixo do arquivo
-    private final File arquivo;
-    private Map<String, Usuario> mapaUsuarios;
+	// Caminho fixo do arquivo
+	private final File arquivo;
+	private Map<String, Usuario> mapaUsuarios;
 
-    /**
-     * Construtor privado — impede criação externa.
-     */
-    private UsuarioDAO(String caminhoArquivo) {
-        this.arquivo = new File(caminhoArquivo);
-    }
+	/**
+	 * Construtor privado — impede criação externa.
+	 */
+	private UsuarioDAO(String caminhoArquivo) {
+		this.arquivo = new File(caminhoArquivo);
+	}
 
-    /**
-     * Método público para obter a instância única.
-     * Singleton Lazy (criado apenas no primeiro uso).
-     */
-    public static synchronized UsuarioDAO getInstance() {
-        if (instancia == null) {
-            instancia = new UsuarioDAO(Messages.getString("NomeArquivoDeUsuarios")); //$NON-NLS-1$);
-        }
-        return instancia;
-    }
+	/**
+	 * Método público para obter a instância única. Singleton Lazy (criado apenas no
+	 * primeiro uso).
+	 */
+	public static synchronized UsuarioDAO getInstance() {
+		if (instancia == null) {
+			instancia = new UsuarioDAO(Messages.getString("NomeArquivoDeUsuarios")); //$NON-NLS-1$ );
+		}
+		return instancia;
+	}
 
-    /**
-     * Salva um usuário no arquivo (append).
-     * Impede IDs duplicados.
-     */
-    public void salvar(Usuario usuario) throws IOException, UsuarioException {
+	/**
+	 * Salva um usuário no mapa em tempo de execução. Impede IDs duplicados, pois só
+	 * adiciona o usuario se o login não existir.
+	 */
+	public void salvar(Usuario usuario) throws IOException, UsuarioException {
 
-        List<Usuario> usuarios = listarTodos();
+		mapaUsuarios.putIfAbsent(usuario.getLogin(), usuario);
 
-        for (Usuario u : usuarios) {
-            if (u.getLogin() == usuario.getLogin()) {
-                throw new UsuarioException("ID já existe no arquivo: " + usuario.getLogin());
-            }
-        }
+	}
 
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(arquivo, true))) {
-            String linha = usuario.getLogin() + "-" + usuario.getSenha() + "-" + usuario.getNome();
-            bw.write(linha);
-            bw.newLine();
-        }
-    }
+	private Map<String, Usuario> listarTodosUsuariosArquivo() throws IOException {
+	    Map<String, Usuario> usuarios = new HashMap<>();
 
-    /**
-     * Lê todos os usuários do arquivo.
-     */
-    private Map<String,Usuario> listarTodosUsuariosArquivo() throws IOException {
-        Map<String,Usuario> usuarios = new HashMap<String, Usuario>();
+	    if (!arquivo.exists()) {
+	        return usuarios;
+	    }
 
-        if (!arquivo.exists()) {
-            return usuarios;
-        }
+	    try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
+	        String linha;
 
-        try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
-            String linha;
+	        while ((linha = br.readLine()) != null) {
 
-            while ((linha = br.readLine()) != null) {
-                String[] partes = linha.split("-");
+	            // dividir corretamente usando hífen literal
+	            String[] partes = linha.split("\\-");
 
-                if (partes.length != 3) {
-                    continue;
-                }
+	            if (partes.length != 3) {
+	                continue;
+	            }
 
-                try {
-                    String login = partes[0];
-                    String senha = partes[1];
-                    String nome = partes[2];
+	            try {
+	                String login = partes[0].trim();
+	                
+	                String senha = partes[1].trim();
+	                String nome  = partes[2].trim();
 
-                    Usuario usuario = new Usuario(login, nome, senha);
-                    usuarios.put(login,usuario);
+	                Usuario usuario = new Usuario(login, nome, senha);
+	                usuarios.put(login, usuario);
 
-                } catch (Exception e) {
-                    // Ignora usuários corrompidos
-                }
-            }
-        }
+	            } catch (Exception e) {
+	                // usuário corrompido → ignorar
+	            }
+	        }
+	    }
 
-        return usuarios;
-    }
+	    return usuarios;
+	}
 
-    /**
-     * Método opcional para inicializar o sistema.
-     * Pode ser usado para criar o arquivo caso não exista.
-     */
-    public void inicializarSistema() {
-        try {
-            if (!arquivo.exists()) {
-                arquivo.createNewFile();
-                mapaUsuarios = new HashMap<String, Usuario>();
-                //@TODO Adicionar usuario default?
-            }else {
-            	mapaUsuarios = listarTodosUsuariosArquivo();
-            }
-        } catch (IOException e) {
-            System.out.println("Erro ao inicializar arquivo: " + e.getMessage());
-        }
-    }
+		 
+
+	/**
+	 * Método opcional para inicializar o sistema. Pode ser usado para criar o
+	 * arquivo caso não exista.
+	 */
+	public void inicializarSistema() {
+		try {
+			if (!arquivo.exists()) {
+				arquivo.createNewFile();
+				mapaUsuarios = new HashMap<String, Usuario>();
+				// @TODO Adicionar usuario default?
+			} else {
+				mapaUsuarios = listarTodosUsuariosArquivo();
+			}
+		} catch (IOException e) {
+			System.out.println("Erro ao inicializar arquivo: " + e.getMessage());
+		}
+	}
+
+	public void fecharSistema() {
+
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(arquivo))) {
+
+			for (Usuario u : mapaUsuarios.values()) {
+				String linha = u.getLogin() + "-" + u.getSenha() + "-" + u.getNome();
+				bw.write(linha);
+				bw.newLine();
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public void remover(int id) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public void update(int id, String nome, String senha) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public Usuario buscarPorLogin(String login) {
 		// TODO Auto-generated method stub
-		return null;
+		return mapaUsuarios.get(login);
 	}
-
-	public Map<String, Usuario> listarUsuarios() {
+ public boolean containsKey(String login) {
 		// TODO Auto-generated method stub
-		return mapaUsuarios;
+		return mapaUsuarios.containsKey(login);
+	}
+	public List<Usuario> listarUsuarios() {
+		// TODO Auto-generated method stub
+		return mapaUsuarios.values().stream().toList();
 	}
 }
-

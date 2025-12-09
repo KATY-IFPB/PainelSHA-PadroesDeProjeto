@@ -54,9 +54,9 @@ public class Usuario {
             throw new UsuarioException(Messages.getString("Usuario.cpfInvalido"));
         }
 
-        if (!isCpfValido(cpf)) {
-            throw new UsuarioException(Messages.getString("Usuario.cpfInvalido"));
-        }
+        //if (!isCpfValido(cpf)) {
+         //   throw new UsuarioException(Messages.getString("Usuario.cpfInvalido"));
+       // }
 
         this.login = cpf; // Armazena sempre sem máscara
     }
@@ -106,7 +106,7 @@ public class Usuario {
     }
 
     public void setSenha(String senha) throws UsuarioException {
-        if (senha == null || senha.length() < 6) {
+        if (senha == null || senha.length() < 4) {
             throw new UsuarioException(Messages.getString("Usuario.4"));
         }
         if (senha.contains("-")) {
@@ -117,7 +117,7 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{cpf=" + login + ", nome='" + nome + "'}";
+        return "Usuario{cpf/login=" + login + ", nome='" + nome + "'}";
         // Senha não exibida por segurança.
     }
 }

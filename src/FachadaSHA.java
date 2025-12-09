@@ -1,14 +1,16 @@
 package src;
 
 
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import hidrometro.CalculoTarifaStrategy;
-import hidrometro.EstadoHidrometro;
 import hidrometro.Hidrometro;
 import hidrometro.TarifaResidencial;
 import usuario.Usuario;
+import usuario.UsuarioException;
 import usuario.UsuarioFacade;
 
 /**
@@ -129,6 +131,28 @@ public class FachadaSHA {
 	public boolean isSistemaInicializado() {
 		// TODO Auto-generated method stub
 		return inicializado;
+	}
+
+	public void adicionarUsuario(String nome, String loginCPF, String senha) {
+		try {
+			usuarioFacade.cadastrarUsuario( loginCPF, nome, senha);
+		} catch (UsuarioException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public List<Usuario> listarUsuarios() {
+		try {
+			return usuarioFacade.listarUsuarios();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 }
 
