@@ -3,7 +3,6 @@ package usuario;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 import javax.security.auth.login.LoginException;
 
@@ -59,11 +58,15 @@ public class UsuarioFacade {
      * Remove um usuário no sistema.
      * 
      */
-    public void removerUsuario(int id)
+    public void removerUsuario(String id)
             throws UsuarioException, IOException {
 
+        if(id!=usuarioLogado.getLogin()) {
+        	usuarioDao.remover(id);
+		}else {
+			throw new UsuarioException("Usuário logado não pode ser removido.");
+		}
         
-        usuarioDao.remover(id);
     }
 
     /**
@@ -74,7 +77,7 @@ public class UsuarioFacade {
             throws UsuarioException, IOException {
 
         
-        usuarioDao.update(id,nome,senha);
+        usuarioDao.update(id+"",nome,senha);
     }
     
     /** 
@@ -84,8 +87,8 @@ public class UsuarioFacade {
     /*
      * <CPF>, Usuario
      */
-    public Map<String,Usuario> listarUsuarios() throws IOException {
-        return (Map<String, Usuario>) usuarioDao.listarUsuarios();
+    public List<Usuario> listarUsuarios() throws IOException {
+        return  usuarioDao.listarUsuarios();
     }
 
     /**
@@ -99,25 +102,27 @@ public class UsuarioFacade {
 	public Usuario autenticarUsuario(String login, String senha) throws LoginException {
 		
 		
-			try {
-				if (listarUsuarios().containsKey(login) ){
-					Usuario usuario = listarUsuarios().get(login);
-					if (usuario.getSenha().equals(senha)) {
-						usuarioLogado = usuario;
-						temUsuarioLogado=true;
-						return usuario;
-					}else {
-						throw new LoginException("Senha incorreta.");
-					}
+			if (usuarioDao.containsKey(login) ){
+				Usuario usuario = usuarioDao.buscarPorLogin(login);
+				if (usuario.getSenha().equals(senha)) {
+					usuarioLogado = usuario;
+					temUsuarioLogado=true;
+					return usuario;
+				}else {
+					throw new LoginException("Senha incorreta.");
 				}
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 		
 		
 		return null;
 		
 	
+	}
+
+	public void logout() {
+		usuarioLogado = null;
+		temUsuarioLogado=false;
+		usuarioDao.salvarEstadoUsuarios();
+		
 	}
 }
