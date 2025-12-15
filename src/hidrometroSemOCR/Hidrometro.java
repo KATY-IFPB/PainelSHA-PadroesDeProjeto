@@ -29,6 +29,7 @@ public class Hidrometro extends Thread {
     public Hidrometro(double leituraInicial) {
 		this.leituraAtual = leituraInicial;
 		//this.id = id;
+		this.intervalo = 5000;
 		this.rodando = false;
 		this.random = new Random();
 		this.formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
@@ -40,7 +41,7 @@ public class Hidrometro extends Thread {
         this.rodando = false;
         this.random = new Random();
         this.formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-        this.id = String.format("%07d", random.nextInt(10000000));
+      //  this.id = String.format("%07d", random.nextInt(10000000));
     }
     public Hidrometro(double leituraInicial, long intervalo) {
         this.leituraAtual = leituraInicial;

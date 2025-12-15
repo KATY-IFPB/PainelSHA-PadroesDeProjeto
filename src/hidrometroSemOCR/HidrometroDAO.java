@@ -121,13 +121,32 @@ public class HidrometroDAO {
     			return mapaHidrometros;
     }
 
-	public void adicionarHidrometro(Hidrometro hidrometro) {
-		new Thread(hidrometro).start();
-		mapaHidrometros.put(hidrometro.getIdentificador(), hidrometro);
+	public synchronized void adicionarHidrometro(Double leituraInicial) {
+		try {
+			Hidrometro hidrometro = new Hidrometro(leituraInicial);
+			new Thread(hidrometro).start();
+			mapaHidrometros.put(hidrometro.getIdentificador(), hidrometro);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
-	public List<Hidrometro> getHidrometros() {
+	public synchronized List<Hidrometro> getHidrometros() {
 		
 		return mapaHidrometros.values().stream().toList();
+	}
+
+	public boolean existeHidrometro(String id) {
+		// TODO Auto-generated method stub
+		return mapaHidrometros.containsKey(id);
+	}
+
+	public void removerHidrometro(String id) {
+		Hidrometro hidrometro = mapaHidrometros.get(id);
+		hidrometro.pararLeitura();
+		mapaHidrometros.remove(id);
+		
 	}
 }

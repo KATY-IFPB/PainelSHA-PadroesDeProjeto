@@ -1,9 +1,13 @@
 package estadosDoPainel;
 
+import operacoes.OperacaoAdicionarHidrometro;
 import operacoes.OperacaoAdicionarUsuario;
 import operacoes.OperacaoAtualizarUsuario;
+import operacoes.OperacaoListarHidrometros;
 import operacoes.OperacaoListarUsuarios;
+import operacoes.OperacaoLogout;
 import operacoes.OperacaoPainel;
+import operacoes.OperacaoRemoverHidrometro;
 import operacoes.OperacaoRemoverUsuario;
 import src.FachadaSHA;
 
@@ -33,7 +37,7 @@ public class EstadoLogado implements EstadoPainelIF {
             case "4" -> new OperacaoAtualizarUsuario(fachada);
             case "5" -> new OperacaoAdicionarHidrometro(fachada);
             case "6" -> new OperacaoListarHidrometros(fachada);
-           // case "7" -> new OperacaoRemoverHidrometro(fachada);
+            case "7" -> new OperacaoRemoverHidrometro(fachada);
            // case 8 -> new OperaçãoCriarContaDeAgua(fachada);
            // case 9 -> new OperaçãoListarContasDeAgua(fachada);
            // case 10 -> new OperaçãoRemoverContaDeAgua(fachada);

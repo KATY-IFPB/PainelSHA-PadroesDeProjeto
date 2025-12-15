@@ -203,6 +203,16 @@ public class FachadaSHA {
 		}
 		return null;
 	}
+
+	public boolean existeHidrometro(String id) {
+		// TODO Auto-generated method stub
+		return hidrometroFacade.existeHidrometro(id);
+	}
+
+	public void removerHidrometro(String id) {
+		hidrometroFacade.removerHidrometro(id);
+		
+	}
 }
 
 
