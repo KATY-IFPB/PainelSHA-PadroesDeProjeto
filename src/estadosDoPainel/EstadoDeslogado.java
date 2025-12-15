@@ -1,8 +1,8 @@
 package estadosDoPainel;
 
+import operacoes.OperacaoLogin;
+import operacoes.OperacaoPainel;
 import src.FachadaSHA;
-import src.OperacaoLogin;
-import src.OperacaoPainel;
 
 public class EstadoDeslogado implements EstadoPainelIF {
 

@@ -1,11 +1,11 @@
 package estadosDoPainel;
 
+import operacoes.OperacaoAdicionarUsuario;
+import operacoes.OperacaoAtualizarUsuario;
+import operacoes.OperacaoListarUsuarios;
+import operacoes.OperacaoPainel;
+import operacoes.OperacaoRemoverUsuario;
 import src.FachadaSHA;
-import src.OperacaoAdicionarUsuario;
-import src.OperacaoAtualizarUsuario;
-import src.OperacaoListarUsuarios;
-import src.OperacaoPainel;
-import src.OperacaoRemoverUsuario;
 
 public class EstadoLogado implements EstadoPainelIF {
 
@@ -17,7 +17,8 @@ public class EstadoLogado implements EstadoPainelIF {
         System.out.println("3 - Remover Usuario");
         System.out.println("4 - Atualizar Usuario");
         System.out.println("5 - Adicionar Hidrometros");
-        System.out.println("6 - Remover Hidrometros");
+        System.out.println("6 - Listar Hidrometros");
+        System.out.println("7 - Remover Hidrometros");
         System.out.println("0 - Logout");
     }
 
@@ -31,8 +32,12 @@ public class EstadoLogado implements EstadoPainelIF {
             case "3" -> new OperacaoRemoverUsuario(fachada);
             case "4" -> new OperacaoAtualizarUsuario(fachada);
             case "5" -> new OperacaoAdicionarHidrometro(fachada);
-            case "6" -> new OperacaoRemoverHidrometro(fachada);
-            
+            case "6" -> new OperacaoListarHidrometros(fachada);
+           // case "7" -> new OperacaoRemoverHidrometro(fachada);
+           // case 8 -> new OperaçãoCriarContaDeAgua(fachada);
+           // case 9 -> new OperaçãoListarContasDeAgua(fachada);
+           // case 10 -> new OperaçãoRemoverContaDeAgua(fachada);
+           //
             case "0" -> new OperacaoLogout(fachada);
             
             default -> {

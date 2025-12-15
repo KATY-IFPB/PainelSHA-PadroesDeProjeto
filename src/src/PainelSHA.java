@@ -6,6 +6,7 @@ import estadosDoPainel.EstadoDeslogado;
 import estadosDoPainel.EstadoLogado;
 import estadosDoPainel.EstadoPainelIF;
 import estadosDoPainel.EstadoPreInicializado;
+import operacoes.OperacaoPainel;
 
 public class PainelSHA {
 

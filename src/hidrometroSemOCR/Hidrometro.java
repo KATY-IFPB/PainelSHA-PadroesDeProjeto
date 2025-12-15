@@ -13,7 +13,7 @@ public class Hidrometro extends Thread {
 	private String id;
     private double leituraAtual;
     private volatile boolean rodando;
-    private long intervalo;
+    private long intervalo = 5000;	
     private Random random;
     private DateTimeFormatter formatter;
 
@@ -26,6 +26,22 @@ public class Hidrometro extends Thread {
         this.id = String.format("%07d", random.nextInt(10000000));
     }
 
+    public Hidrometro(double leituraInicial) {
+		this.leituraAtual = leituraInicial;
+		//this.id = id;
+		this.rodando = false;
+		this.random = new Random();
+		this.formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+		this.id = String.format("%07d", random.nextInt(10000000));
+	}
+    public Hidrometro(String id, double leituraInicial) {
+        this.leituraAtual = leituraInicial;
+        this.id = id;
+        this.rodando = false;
+        this.random = new Random();
+        this.formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        this.id = String.format("%07d", random.nextInt(10000000));
+    }
     public Hidrometro(double leituraInicial, long intervalo) {
         this.leituraAtual = leituraInicial;
         this.intervalo = intervalo;
@@ -74,10 +90,7 @@ public class Hidrometro extends Thread {
                     }
                     // ----------------------------------
 
-                    String dataHora = LocalDateTime.now().format(formatter);
-
-                    System.out.printf("[%s] (%s) Leitura: %.3f m³ (Consumo: %.3f m³)%n",
-                            dataHora, id, leituraAtual, consumo);
+                   
                 }
 
             } catch (InterruptedException e) {
@@ -114,4 +127,12 @@ public class Hidrometro extends Thread {
     public String getIdentificador() {
         return this.id;
     }
+    
+    public String toString() {
+    	String resposta="";
+		resposta+=("Hidrômetro ID: " + id+" ");
+		resposta+=("Leitura Atual: " + String.format("%.3f", leituraAtual)+" ");
+		resposta+=("Última Atualização: " + LocalDateTime.now().format(formatter)+"\n");
+		return resposta;
+	}
 }

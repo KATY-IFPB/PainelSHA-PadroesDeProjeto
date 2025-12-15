@@ -2,10 +2,11 @@ package src;
 
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import hidrometroSemOCR.Hidrometro;
+import hidrometroSemOCR.HidrometroFacade;
 
 import usuario.Usuario;
 import usuario.UsuarioException;
@@ -189,8 +190,18 @@ public class FachadaSHA {
 	}
 
 	public void adicionarHidrometro(double leitura) {
-		Hi
+		hidrometroFacade.adicionarHidrometro(leitura);
 		
+	}
+
+	public List<Hidrometro> listarHidrometros() {
+		try {
+			return hidrometroFacade.listarHidrometros();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 }
 

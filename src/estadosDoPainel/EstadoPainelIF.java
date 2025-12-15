@@ -1,7 +1,7 @@
 package estadosDoPainel;
 
+import operacoes.OperacaoPainel;
 import src.FachadaSHA;
-import src.OperacaoPainel;
 
 public interface EstadoPainelIF {
     void mostrarMenu();

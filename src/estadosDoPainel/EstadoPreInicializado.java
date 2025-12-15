@@ -1,8 +1,8 @@
 package estadosDoPainel;
 
+import operacoes.OperacaoIniciarSistema;
+import operacoes.OperacaoPainel;
 import src.FachadaSHA;
-import src.OperacaoIniciarSistema;
-import src.OperacaoPainel;
 
 public class EstadoPreInicializado implements EstadoPainelIF {
 

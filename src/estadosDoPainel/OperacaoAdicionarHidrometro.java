@@ -2,8 +2,8 @@ package estadosDoPainel;
 
 import java.util.Scanner;
 
+import operacoes.OperacaoPainel;
 import src.FachadaSHA;
-import src.OperacaoPainel;
 
 public class OperacaoAdicionarHidrometro extends OperacaoPainel{
 	private FachadaSHA fachada;
@@ -37,7 +37,7 @@ public class OperacaoAdicionarHidrometro extends OperacaoPainel{
 
 	@Override
 	protected void exibirResultado() {
-		// TODO Auto-generated method stub
+		System.out.println("Hidrometro adicionado com sucesso!");
 		
 	}
 

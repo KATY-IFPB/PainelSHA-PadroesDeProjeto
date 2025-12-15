@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import src.Configuracoes;
 import src.Messages;
 
 public class UsuarioDAO {
@@ -34,7 +35,7 @@ public class UsuarioDAO {
 	 */
 	public static synchronized UsuarioDAO getInstance() {
 		if (instancia == null) {
-			instancia = new UsuarioDAO(Messages.getString("NomeArquivoDeUsuarios")); //$NON-NLS-1$ );
+			instancia = new UsuarioDAO(Configuracoes.getString("NomeArquivoDeUsuarios")); //$NON-NLS-1$ );
 		}
 		return instancia;
 	}
