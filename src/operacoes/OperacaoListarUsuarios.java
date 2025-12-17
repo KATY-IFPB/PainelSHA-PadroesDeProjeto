@@ -1,11 +1,13 @@
 package operacoes;
 
 import src.FachadaSHA;
+import src.Logger;
 import usuario.Usuario;
 
 public class OperacaoListarUsuarios extends OperacaoPainel{
 
 	private FachadaSHA fachada;
+	private Logger log = Logger.getInstance();
 	
 	public OperacaoListarUsuarios(FachadaSHA fachada) {
 		this.fachada = fachada;
@@ -27,6 +29,7 @@ public class OperacaoListarUsuarios extends OperacaoPainel{
 		for (Usuario usuario : fachada.listarUsuarios()) {
 			System.out.println("- " + usuario);
 		}
+		log.info("Usuários listados com sucesso.");
 	}
 
 	@Override

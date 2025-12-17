@@ -1,6 +1,6 @@
 package operacoes;
 
-import src.UsuarioExistenteException;
+import usuario.UsuarioExistenteException;
 
 public abstract class OperacaoPainel {
 

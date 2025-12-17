@@ -2,10 +2,12 @@ package operacoes;
 
 import hidrometroSemOCR.Hidrometro;
 import src.FachadaSHA;
+import src.Logger;
 
 public class OperacaoListarHidrometros extends OperacaoPainel{
 
 	private FachadaSHA fachada;
+	private Logger log = Logger.getInstance();
 	
 	public OperacaoListarHidrometros(FachadaSHA fachada) {
 		this.fachada = fachada;
@@ -27,6 +29,7 @@ public class OperacaoListarHidrometros extends OperacaoPainel{
 		for (Hidrometro hidrometro: fachada.listarHidrometros()) {
 			System.out.println("- " + hidrometro);
 		}
+		log.info("Hidrometros listados com sucesso.");
 	}
 
 	@Override

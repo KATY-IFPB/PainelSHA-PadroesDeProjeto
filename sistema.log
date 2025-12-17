@@ -1,0 +1,100 @@
+2025-12-15T17:00:36.218694836 [INFO] Sistema Inicializado
+2025-12-15T17:35:41.708973398 [INFO] Sistema Inicializado
+2025-12-15T17:36:00.050486929 [ERRO] Falha no login para o usuário 05335155485
+   Causa: Usuario inexistente.
+2025-12-15T17:36:22.214776414 [INFO] Usuário 05335155480 logado com sucesso.
+2025-12-15T17:36:32.517333258 [INFO] Usuários listados com sucesso.
+2025-12-15T17:36:49.491963923 [INFO] Hidrometros listados com sucesso.
+2025-12-15T17:37:00.057529312 [INFO] Usuário 05335155480 deslogado com sucesso.
+2025-12-15T23:42:58.699431637 [INFO] Sistema Inicializado
+2025-12-15T23:43:13.864161542 [INFO] Usuário 05335155480 logado com sucesso.
+2025-12-15T23:43:49.626205765 [INFO] Usuários listados com sucesso.
+2025-12-15T23:43:55.065943771 [INFO] Hidrometros listados com sucesso.
+2025-12-15T23:44:53.483605876 [INFO] Usuário 05335155480 deslogado com sucesso.
+2025-12-16T00:01:32.875872399 [INFO] Sistema Inicializado
+2025-12-16T00:01:42.010791688 [INFO] Usuário 05335155480 logado com sucesso.
+2025-12-16T00:02:16.051190922 [INFO] Usuário 05335155480 deslogado com sucesso.
+2025-12-16T02:43:20.134500219 [INFO] Sistema Inicializado
+2025-12-16T02:43:34.850981365 [INFO] Usuário 05335155480 logado com sucesso.
+2025-12-16T02:45:16.879990175 [INFO] Hidrometro adicionado com leitura: 32.0
+2025-12-16T02:45:25.888203017 [INFO] Hidrometros listados com sucesso.
+2025-12-16T02:45:47.668186193 [INFO] Usuário 05335155480 deslogado com sucesso.
+2025-12-16T20:10:02.338414035 [INFO] Sistema Inicializado
+2025-12-16T20:10:14.462984385 [INFO] Usuário 05335155480 logado com sucesso.
+2025-12-16T20:10:19.765546719 [INFO] Usuários listados com sucesso.
+2025-12-16T20:11:53.469822573 [INFO] Conta de água criada com sucesso para o usuário 05335155460 e hidrômetro 3697415.
+2025-12-16T20:12:21.726486570 [INFO] Hidrometro com ID 3697415 removido com sucesso.
+2025-12-16T20:12:53.837381115 [INFO] Hidrometro com ID 5156327 removido com sucesso.
+2025-12-16T20:13:02.253248320 [INFO] Usuário 05335155480 deslogado com sucesso.
+2025-12-16T20:41:55.120355682 [INFO] Sistema Inicializado
+2025-12-16T20:42:06.152223460 [INFO] Usuário 05335155480 logado com sucesso.
+2025-12-16T20:42:11.370911830 [INFO] Hidrometros listados com sucesso.
+2025-12-16T21:12:48.070773147 [INFO] Sistema Inicializado
+2025-12-16T21:12:59.083460441 [INFO] Usuário 05335155480 logado com sucesso.
+2025-12-16T21:13:07.549714654 [INFO] Hidrometros listados com sucesso.
+2025-12-16T21:13:29.492619311 [INFO] Conta com ID 8db543cc-e867-4d20-9466-12576dbf874d removido com sucesso.
+2025-12-16T21:13:34.762796051 [INFO] Hidrometros listados com sucesso.
+2025-12-16T21:23:30.327730736 [INFO] Sistema Inicializado
+2025-12-16T21:23:39.135338646 [INFO] Usuário 05335155480 logado com sucesso.
+2025-12-16T21:23:44.597945962 [INFO] Hidrometros listados com sucesso.
+2025-12-16T21:23:55.735456035 [INFO] Conta com ID 5086092e-ce08-4821-bfd9-b7fed17cec89 removido com sucesso.
+2025-12-16T21:24:02.293376193 [INFO] Hidrometros listados com sucesso.
+2025-12-16T21:24:08.088363145 [INFO] Usuário 05335155480 deslogado com sucesso.
+2025-12-16T22:35:40.810285279 [INFO] Sistema Inicializado
+2025-12-16T22:35:51.642942820 [ERRO] Falha no login para o usuário 05335155485
+   Causa: Usuario inexistente.
+2025-12-16T22:36:19.482816562 [INFO] Usuário 05335155480 logado com sucesso.
+2025-12-16T22:36:25.111423418 [INFO] Hidrometros listados com sucesso.
+2025-12-16T22:36:44.167863866 [INFO] Hidrometros listados com sucesso.
+2025-12-16T22:37:28.796316486 [INFO] Conta de água criada com sucesso para o usuário 05335155460 e hidrômetro 7803693.
+2025-12-16T22:37:54.244791062 [INFO] Hidrometros listados com sucesso.
+2025-12-16T22:39:25.431728074 [INFO] Hidrometro com ID 7803693 removido com sucesso.
+2025-12-16T22:53:20.088594816 [INFO] Sistema Inicializado
+2025-12-16T22:53:41.684999879 [INFO] Usuário 05335155480 logado com sucesso.
+2025-12-16T22:53:51.647712498 [INFO] Hidrometros listados com sucesso.
+2025-12-16T22:54:19.238259128 [INFO] Conta de água criada com sucesso para o usuário 05335155460 e hidrômetro 1956748.
+2025-12-16T22:54:25.027741921 [INFO] Hidrometros listados com sucesso.
+2025-12-16T22:54:40.206450756 [INFO] Hidrometro com ID 1956748 removido com sucesso.
+2025-12-16T22:54:46.906648065 [INFO] Hidrometros listados com sucesso.
+2025-12-16T22:54:59.617219700 [INFO] Hidrometros listados com sucesso.
+2025-12-16T22:55:41.530167630 [INFO] Conta de água criada com sucesso para o usuário 05335155480 e hidrômetro 7199209.
+2025-12-16T22:55:45.802846035 [INFO] Hidrometros listados com sucesso.
+2025-12-16T22:55:49.439587917 [INFO] Usuário 05335155480 deslogado com sucesso.
+2025-12-16T23:20:52.059552944 [INFO] Usuário 05335155480 logado com sucesso.
+2025-12-16T23:21:00.158543232 [INFO] Usuários listados com sucesso.
+2025-12-16T23:33:36.022612454 [INFO] Usuário 05335155480 logado com sucesso.
+2025-12-16T23:33:41.121211556 [INFO] Usuários listados com sucesso.
+2025-12-16T23:38:12.923509807 [INFO] Sistema Inicializado
+2025-12-16T23:38:25.361359090 [INFO] Usuário 05335155480 logado com sucesso.
+2025-12-17T00:08:12.026497873 [INFO] Sistema Inicializado
+2025-12-17T00:08:22.445768942 [ERRO] Falha no login para o usuário 05335155480
+   Causa: Usuario inexistente.
+2025-12-17T00:09:32.626991126 [INFO] Sistema Inicializado
+2025-12-17T00:09:41.551566046 [INFO] Usuário 05335155480 logado com sucesso.
+2025-12-17T00:09:52.966024093 [INFO] Usuários listados com sucesso.
+2025-12-17T01:37:40.664984406 [INFO] Sistema Inicializado
+2025-12-17T01:37:48.822075818 [ERRO] Falha no login para o usuário 05335155487
+   Causa: Usuario inexistente.
+2025-12-17T01:38:12.753623429 [INFO] Usuário 05335155480 logado com sucesso.
+2025-12-17T01:39:01.561309138 [INFO] Usuário Maria joaquinaCPF: 05335155689 adicionado com sucesso.
+2025-12-17T01:39:05.909735404 [INFO] Usuários listados com sucesso.
+2025-12-17T01:39:27.297099026 [INFO] Tentativa de remoção de usuário inexistente com CPF 05335155487.
+2025-12-17T01:39:38.592448112 [INFO] Usuário com CPF 05335155490 removido com sucesso.
+2025-12-17T01:39:42.657037112 [INFO] Usuários listados com sucesso.
+2025-12-17T01:39:51.848116354 [INFO] Hidrometros listados com sucesso.
+2025-12-17T01:40:05.707082495 [INFO] Hidrometro adicionado com leitura: 9.8098098E7
+2025-12-17T01:40:21.963419983 [INFO] Hidrometro adicionado com leitura: 56.78
+2025-12-17T01:40:26.967340130 [INFO] Hidrometros listados com sucesso.
+2025-12-17T01:41:10.187173102 [INFO] Hidrometro com ID 7803693 removido com sucesso.
+2025-12-17T01:41:21.738718236 [INFO] Hidrometros listados com sucesso.
+2025-12-17T01:41:30.544187805 [INFO] Hidrometros listados com sucesso.
+2025-12-17T01:41:43.495175258 [ERRO] Erro ao criar conta de água: Usuário com o ID fornecido não existe.
+2025-12-17T01:42:00.452190568 [ERRO] Erro ao criar conta de água: Hidrômetro com o ID fornecido não existe.
+2025-12-17T01:42:52.849666816 [INFO] Hidrometros listados com sucesso.
+2025-12-17T01:44:53.112538286 [INFO] Sistema Inicializado
+2025-12-17T01:45:06.158425962 [INFO] Usuário 05335155480 logado com sucesso.
+2025-12-17T01:45:11.181494886 [INFO] Usuários listados com sucesso.
+2025-12-17T01:45:15.428205461 [INFO] Hidrometros listados com sucesso.
+2025-12-17T01:45:54.173466518 [INFO] Conta de água criada com sucesso para o usuário 05335155460 e hidrômetro 7199209.
+2025-12-17T01:46:00.178397366 [INFO] Hidrometros listados com sucesso.
+2025-12-17T01:47:54.691018076 [INFO] Usuário 05335155480 deslogado com sucesso.

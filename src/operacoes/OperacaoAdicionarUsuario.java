@@ -3,13 +3,15 @@ package operacoes;
 import java.util.Scanner;
 
 import src.FachadaSHA;
-import src.UsuarioExistenteException;
+import src.Logger;
+import usuario.UsuarioExistenteException;
 
 public class OperacaoAdicionarUsuario extends OperacaoPainel {
 	private FachadaSHA fachada;
 	private String nome;
 	private String loginCPF;
 	private String senha;
+	private Logger log = Logger.getInstance();
 
 	public OperacaoAdicionarUsuario(FachadaSHA fachada) {
 		this.fachada = fachada;
@@ -37,6 +39,7 @@ public class OperacaoAdicionarUsuario extends OperacaoPainel {
 	@Override
 	protected void processar() throws UsuarioExistenteException {
 		fachada.adicionarUsuario(nome, loginCPF, senha);
+		log.info("Usuário " + nome + "CPF: "+loginCPF+" adicionado com sucesso.");
 		System.out.println("Usuário adicionado com sucesso.");
 	}
 

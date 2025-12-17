@@ -1,40 +1,58 @@
 package usuario;
 
-
 import java.io.IOException;
 import java.util.List;
 
 import javax.security.auth.login.LoginException;
 
 /**
- * Fachada para operações relacionadas aos usuários.
- * Implementada como Singleton para garantir apenas uma instância global.
+ * UsuarioFacade
+ *
+ * Fachada responsável por centralizar todas as operações
+ * relacionadas a usuários do sistema.
+ *
+ * Aplica os padrões:
+ * - Facade → simplifica o acesso ao subsistema de usuários
+ * - Singleton → garante uma única instância global
+ *
+ * A camada de apresentação (Painel) nunca acessa o DAO diretamente,
+ * apenas esta fachada.
  */
 public class UsuarioFacade {
 
-    private static UsuarioFacade instancia;    // única instância
-    private UsuarioDAO usuarioDao;             // acesso ao DAO
+    // ===================== ATRIBUTOS =====================
+
+    /** Instância única da fachada (Singleton) */
+    private static UsuarioFacade instancia;
+
+    /** DAO responsável pela persistência dos usuários */
+    private UsuarioDAO usuarioDao;
+
+    /** Usuário atualmente logado no sistema */
     private Usuario usuarioLogado;
+
+    /** Indica se existe um usuário logado */
     private boolean temUsuarioLogado;
-    //private Map<String,Usuario> usuariosDoSistema;
-    
+
+    // ===================== CONSTRUTOR =====================
 
     /**
-     * Construtor privado para impedir criação externa.
+     * Construtor privado.
+     * Impede criação externa e força o uso do getInstance().
      */
     private UsuarioFacade() {
-        // Inicializa o DAO usando um arquivo padrão
         usuarioDao = UsuarioDAO.getInstance();
-        usuarioDao.inicializarSistema();
-        usuarioLogado=null;
-        
-        temUsuarioLogado=false;
-        
-        
+        usuarioDao.inicializarSistema(); // carrega usuários do arquivo
+        usuarioLogado = null;
+        temUsuarioLogado = false;
     }
 
+    // ===================== SINGLETON =====================
+
     /**
-     * Método estático que retorna a instância única da fachada.
+     * Retorna a instância única da fachada.
+     *
+     * @return UsuarioFacade
      */
     public static synchronized UsuarioFacade getInstance() {
         if (instancia == null) {
@@ -43,9 +61,17 @@ public class UsuarioFacade {
         return instancia;
     }
 
+    // ===================== CASOS DE USO =====================
+
     /**
-     * Registra um novo usuário no sistema.
-     * A fachada esconde os detalhes de persistência.
+     * Cadastra um novo usuário no sistema.
+     *
+     * A fachada cria o objeto Usuario, valida os dados
+     * e delega a persistência ao DAO.
+     *
+     * @param login CPF do usuário
+     * @param nome  Nome do usuário
+     * @param senha Senha do usuário
      */
     public void cadastrarUsuario(String login, String nome, String senha)
             throws UsuarioException, IOException {
@@ -53,76 +79,104 @@ public class UsuarioFacade {
         Usuario usuario = new Usuario(login, nome, senha);
         usuarioDao.salvar(usuario);
     }
-    
+
     /**
-     * Remove um usuário no sistema.
-     * 
+     * Remove um usuário do sistema.
+     *
+     * Regra de negócio:
+     * - Um usuário não pode remover a si próprio enquanto estiver logado.
+     *
+     * @param id CPF do usuário a ser removido
      */
     public void removerUsuario(String id)
             throws UsuarioException, IOException {
 
-        if(id!=usuarioLogado.getLogin()) {
-        	usuarioDao.remover(id);
-		}else {
-			throw new UsuarioException("Usuário logado não pode ser removido.");
-		}
-        
+        if (!id.equals(usuarioLogado.getLogin())) {
+            usuarioDao.remover(id);
+        } else {
+            throw new UsuarioException(Messages.getString("UsuarioFacade.0")); //$NON-NLS-1$
+        }
     }
 
     /**
-     * Atualiza o cadastro do usuario no sistema.
-     * .
+     * Atualiza os dados de um usuário.
+     *
+     * @param id    CPF do usuário
+     * @param nome  Novo nome
+     * @param senha Nova senha
      */
     public void updateUsuario(int id, String nome, String senha)
             throws UsuarioException, IOException {
 
-        
-        usuarioDao.update(id+"",nome,senha);
-    }
-    
-    /** 
-     * Lista todos os usuários cadastrados. 
-     * 
-     */
-    /*
-     * <CPF>, Usuario
-     */
-    public List<Usuario> listarUsuarios() throws IOException {
-        return  usuarioDao.listarUsuarios();
+        usuarioDao.update(id + "", nome, senha); //$NON-NLS-1$
     }
 
     /**
-     * Busca um usuário pelo ID.
+     * Lista todos os usuários cadastrados no sistema.
+     *
+     * @return lista de usuários
      */
-    public Usuario buscarPorLogin(String login) throws IOException {
-        
-        return usuarioDao.buscarPorLogin(login); 
+    public List<Usuario> listarUsuarios() throws IOException {
+        return usuarioDao.listarUsuarios();
     }
 
-	public Usuario autenticarUsuario(String login, String senha) throws LoginException {
-		
-		
-			if (usuarioDao.containsKey(login) ){
-				Usuario usuario = usuarioDao.buscarPorLogin(login);
-				if (usuario.getSenha().equals(senha)) {
-					usuarioLogado = usuario;
-					temUsuarioLogado=true;
-					return usuario;
-				}else {
-					throw new LoginException("Senha incorreta.");
-				}
-			}
-		
-		
-		return null;
-		
-	
-	}
+    /**
+     * Busca um usuário pelo CPF (login).
+     *
+     * @param login CPF do usuário
+     * @return usuário encontrado ou null
+     */
+    public Usuario buscarPorLogin(String login) throws IOException {
+        return usuarioDao.buscarPorLogin(login);
+    }
 
-	public void logout() {
-		usuarioLogado = null;
-		temUsuarioLogado=false;
-		usuarioDao.salvarEstadoUsuarios();
-		
-	}
+    /**
+     * Autentica um usuário no sistema.
+     *
+     * Regras:
+     * - Login deve existir
+     * - Senha deve corresponder
+     *
+     * @param login CPF
+     * @param senha senha
+     * @return usuário autenticado
+     * @throws LoginException se senha estiver incorreta
+     */
+    public Usuario autenticarUsuario(String login, String senha) throws LoginException {
+
+        if (usuarioDao.containsKey(login)) {
+            Usuario usuario = usuarioDao.buscarPorLogin(login);
+
+            if (usuario.getSenha().equals(senha)) {
+                usuarioLogado = usuario;
+                temUsuarioLogado = true;
+                return usuario;
+            } else {
+                throw new LoginException(Messages.getString("UsuarioFacade.2")); //$NON-NLS-1$
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Realiza logout do usuário atual.
+     *
+     * Também salva o estado dos usuários no arquivo.
+     */
+    public void logout() {
+        usuarioLogado = null;
+        temUsuarioLogado = false;
+        usuarioDao.salvarEstadoUsuarios();
+    }
+
+    // ===================== MÉTODOS AUXILIARES =====================
+
+    /**
+     * Retorna o DAO de usuários.
+     * Usado internamente por outras fachadas (Observer).
+     */
+    public UsuarioDAO getUsuarioDAO() {
+        return usuarioDao;
+    }
 }

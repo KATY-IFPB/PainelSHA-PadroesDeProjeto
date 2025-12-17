@@ -3,10 +3,12 @@ package operacoes;
 import java.util.Scanner;
 
 import src.FachadaSHA;
+import src.Logger;
 
 public class OperacaoAdicionarHidrometro extends OperacaoPainel{
 	private FachadaSHA fachada;
 	private double leitura;
+	private Logger log = Logger.getInstance();
 
 	public OperacaoAdicionarHidrometro(FachadaSHA fachada) {
 		this.fachada = fachada;
@@ -17,7 +19,6 @@ public class OperacaoAdicionarHidrometro extends OperacaoPainel{
 		System.out.println("Digite a leitura do novo hidrometro");
 		leitura = sc.nextDouble();
 	
-		
 		
 	}
 
@@ -31,8 +32,8 @@ public class OperacaoAdicionarHidrometro extends OperacaoPainel{
 	protected void processar() {
 	
 		fachada.adicionarHidrometro(leitura);
+		log.info("Hidrometro adicionado com leitura: " + leitura);
 		
-		// TODO Auto-generated method stub
 		
 	}
 

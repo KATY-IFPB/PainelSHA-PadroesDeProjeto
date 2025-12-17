@@ -1,10 +1,14 @@
 package operacoes;
 
 import src.FachadaSHA;
+import src.Logger;
 import src.Messages;
 
 public class OperacaoIniciarSistema extends OperacaoPainel {
 	FachadaSHA fachada;
+	Logger log = Logger.getInstance();
+
+	
 	 
 	public OperacaoIniciarSistema(FachadaSHA fachada) {
 		this.fachada = fachada;
@@ -24,7 +28,7 @@ public class OperacaoIniciarSistema extends OperacaoPainel {
 	@Override
 	protected void processar() {
 		fachada.iniciar();
-		
+		log.info("Sistema Inicializado");
 	}
 
 	@Override

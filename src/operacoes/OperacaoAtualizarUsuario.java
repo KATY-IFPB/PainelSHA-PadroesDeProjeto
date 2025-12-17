@@ -3,10 +3,12 @@ package operacoes;
 import java.util.Scanner;
 
 import src.FachadaSHA;
+import src.Logger;
 
 public class OperacaoAtualizarUsuario extends OperacaoPainel {
 	private FachadaSHA fachada;
 	private String cpfAntigo,cpfNovo,nomeNovo,senhaNova;
+	private Logger log = Logger.getInstance();
 
 	public OperacaoAtualizarUsuario(FachadaSHA fachada) {
 		this.fachada = fachada;

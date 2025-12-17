@@ -3,11 +3,13 @@ package operacoes;
 import java.util.Scanner;
 
 import src.FachadaSHA;
-import src.UsuarioExistenteException;
+import src.Logger;
+import usuario.UsuarioExistenteException;
 
 public class OperacaoRemoverHidrometro extends OperacaoPainel {
 	private FachadaSHA fachada;
 	private String id;
+	private Logger log = Logger.getInstance();
 
 	public OperacaoRemoverHidrometro(FachadaSHA fachada) {
 		this.fachada = fachada;
@@ -26,7 +28,9 @@ public class OperacaoRemoverHidrometro extends OperacaoPainel {
 		
 		// Validação simples para garantir que os campos não estejam vazios
 				if (id.isEmpty()) {
+					log.error("Tentativa de remoção de hidrometro com ID vazio.",null);
 					throw new IllegalArgumentException("ID não pode ser vazio.");
+					
 				}
 		
 	}
@@ -36,12 +40,14 @@ public class OperacaoRemoverHidrometro extends OperacaoPainel {
 		try {
 			if(fachada.existeHidrometro(id)) {
 				fachada.removerHidrometro(id);
+				log.info("Hidrometro com ID " + id + " removido com sucesso.");
 				System.out.println("Hidrometro removido com sucesso.");
 			}else {
 				System.out.println("O hidrometro com o ID informado não existe.");
 			}
 		} catch (Exception e) {
 			System.out.println("Erro ao remover hidrometro: " + e.getMessage());
+			log.error("Erro ao remover hidrometro com ID " + id, e);
 		}
 		
 	}

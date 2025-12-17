@@ -3,11 +3,13 @@ package operacoes;
 import java.util.Scanner;
 
 import src.FachadaSHA;
-import src.UsuarioExistenteException;
+import src.Logger;
+import usuario.UsuarioExistenteException;
 
 public class OperacaoRemoverUsuario extends OperacaoPainel {
 	private FachadaSHA fachada;
 	private String cpf;
+	private Logger log = Logger.getInstance();
 
 	public OperacaoRemoverUsuario(FachadaSHA fachada) {
 		this.fachada = fachada;
@@ -26,8 +28,10 @@ public class OperacaoRemoverUsuario extends OperacaoPainel {
 		
 		// Validação simples para garantir que os campos não estejam vazios
 				if (cpf.isEmpty()) {
+					log.error("Tentativa de remoção de usuário com CPF vazio.",null);
 					throw new IllegalArgumentException("CPF não pode ser vazio.");
 				}if(cpf.equals(fachada.getUsuarioLogado().getLogin())) {
+					log.error("Tentativa de remoção do usuário logado.",null);
 					throw new IllegalArgumentException("Não é possível remover o usuário logado.");
 				}
 		
@@ -38,11 +42,14 @@ public class OperacaoRemoverUsuario extends OperacaoPainel {
 		try {
 			if(fachada.existeUsuario(cpf)) {
 				fachada.removerUsuario(cpf);
+				log.info("Usuário com CPF " + cpf + " removido com sucesso.");
 				System.out.println("Usuário removido com sucesso.");
 			}else {
+				log.info("Tentativa de remoção de usuário inexistente com CPF " + cpf + ".");
 				System.out.println("Usuário com o CPF informado não existe.");
 			}
 		} catch (Exception e) {
+			log.error("Erro ao remover usuário com CPF " + cpf, e);
 			System.out.println("Erro ao remover usuário: " + e.getMessage());
 		}
 		
